@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+dist/
+*.wav
+codex.log
+PROMPT.md
+SUMMARY.md
+codex.log
+.venv/
+dist/
+__pycache__/
+*.egg-info/

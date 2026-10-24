@@ -1,0 +1,21 @@
+name: checks
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.10', '3.12', '3.14']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '${{ matrix.python }}'
+      - run: sh scripts/build-test-pjsua.sh "$RUNNER_TEMP/pjproject"
+      - run: make -C helpers PJDIR="$RUNNER_TEMP/pjproject/pjproject-2.17" OUTPUT="$RUNNER_TEMP/pjproject/bin/sipling-stream"
+      - run: echo "$RUNNER_TEMP/pjproject/bin" >> "$GITHUB_PATH"
+      - run: pip install -e '.[test]'
+      - run: ruff check . && ruff format --check .
+      - run: mypy src
+      - run: pytest -q
+      - run: python -m build
