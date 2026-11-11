@@ -22,7 +22,7 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
     if not config.getoption("--live"):
         for item in items:
             fixtures = item.fixturenames if isinstance(item, pytest.Function) else ()
-            if "live" in item.keywords and "earshot_transport" not in fixtures:
+            if "live" in item.keywords and "otoscope_transport" not in fixtures:
                 item.add_marker(pytest.mark.skip(reason="live SIP tests require --live"))
 
 

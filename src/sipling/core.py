@@ -335,6 +335,22 @@ class CallResult:
             "ladder": self.ladder,
         }
 
+    def save_audio(self, path: str | Path) -> Path:
+        """Copy the call's recorded audio WAV to path.
+
+        The recording lives in a temporary directory that is removed on
+        hangup/context exit, so call this before the call is closed. Raises
+        FileNotFoundError if no audio was recorded yet.
+        """
+        import shutil
+
+        destination = Path(path)
+        if not self._recording.exists():
+            raise FileNotFoundError("no recorded audio for this call yet")
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(self._recording, destination)
+        return destination
+
     def save_ladder(self, path: str | Path) -> None:
         Path(path).write_text(json.dumps(self.to_dict(), indent=2) + "\n")
 

@@ -34,6 +34,15 @@ def test_answer_energy_and_bye(agent_factory, transport, tmp_path):
     assert result._process.poll() is not None
 
 
+def test_save_audio_copies_recording(agent_factory, tmp_path):
+    agent = agent_factory("tcp")
+    with call(agent.uri, transport="tcp", timeout=4) as result:
+        assert result.answered
+        assert result.heard_audio(within=3)
+        out = result.save_audio(tmp_path / "sub" / "greeting.wav")
+    assert out.exists() and out.stat().st_size > 44
+
+
 def test_silence(agent_factory):
     agent = agent_factory(audio=False)
     with call(agent.uri, timeout=4) as result:

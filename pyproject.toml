@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "sipling"
-version = "0.2.0"
+version = "0.2.1"
 description = "Be the phone: scriptable SIP testing for voice agents"
 readme = "README.md"
 requires-python = ">=3.10"
