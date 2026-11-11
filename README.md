@@ -110,7 +110,7 @@ verified a pjproject 2.17 headless build; the wrapper does not patch or bundle i
 
 v0.2 is tested on macOS and Linux against pjproject 2.17, with real loopback SIP/RTP integration tests in CI. Honest boundaries: streaming mode is PCMU-only and needs the separately compiled helper; TLS, SRTP, digest auth, and registration are supported by the probe backend via pjsua but unverified on the streaming path; Windows is not supported yet. The blocking API (`probe`) and streaming API (`call`) are stable from here; breaking changes bump the minor version until 1.0.
 
-## v0.2 streaming and earshot
+## v0.2 streaming and otoscope
 
 `call()` requires a separately compiled `sipling-stream` executable on PATH
 (or set `SIPLING_STREAM_EXECUTABLE` to its absolute path). It returns immediately;
@@ -137,7 +137,7 @@ sh sipling/examples/run-local.sh /tmp/sipling-human-pjproject
 ```
 
 This starts a second **real pjsua** auto-answering on loopback with a greeting WAV,
-uses earshot's unchanged `SiplingTransport`, plays a caller turn, commands a reply,
+uses otoscope's unchanged `SiplingTransport`, plays a caller turn, commands a reply,
 and verifies received RFC2833 digits. It never contacts an external URI. See
 `../INTEGRATION.md` for measured timings, complete checks, limitations and the
 explicit `--uri` invocation for a future authorized endpoint.
@@ -146,7 +146,7 @@ Streaming currently offers PCMU only, with UDP/TCP on POSIX. The blocking probe
 retains its G.722/PCMU/PCMA offer and recorder-based `heard_audio`. Streaming ladders
 are immutable snapshots of `Event(name, at)` with monotonic timestamps, not the
 probe's string SIP ladder. There is no implicit fallback: a recorder is unsuitable
-for earshot timing measurements. Existing v0.1 Python callers must change their
+for otoscope timing measurements. Existing v0.1 Python callers must change their
 import to `from sipling import probe as call` or migrate to asynchronous streaming.
 
 Receive queues are bounded to five frames and fail on overflow or a frame older

@@ -9,8 +9,8 @@ from contextlib import nullcontext
 from dataclasses import asdict
 from pathlib import Path
 
-from earshot import CallSession
-from earshot.sipling import SiplingTransport
+from otoscope import CallSession
+from otoscope.sipling import SiplingTransport
 from local_agent import LocalAgent, tone
 
 
