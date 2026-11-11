@@ -106,6 +106,10 @@ built headless pjproject (`./configure --disable-sound --disable-video`, then
 verified a pjproject 2.17 headless build; the wrapper does not patch or bundle it.
 
 
+## Status: beta
+
+v0.2 is tested on macOS and Linux against pjproject 2.17, with real loopback SIP/RTP integration tests in CI. Honest boundaries: streaming mode is PCMU-only and needs the separately compiled helper; TLS, SRTP, digest auth, and registration are supported by the probe backend via pjsua but unverified on the streaming path; Windows is not supported yet. The blocking API (`probe`) and streaming API (`call`) are stable from here; breaking changes bump the minor version until 1.0.
+
 ## v0.2 streaming and earshot
 
 `call()` requires a separately compiled `sipling-stream` executable on PATH

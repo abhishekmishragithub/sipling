@@ -10,7 +10,16 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 authors = [{name = "sipling contributors"}]
-classifiers = ["Programming Language :: Python :: 3", "Typing :: Typed"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python :: 3",
+  "Typing :: Typed",
+  "Intended Audience :: Developers",
+  "Topic :: Software Development :: Testing",
+  "Topic :: Communications :: Telephony",
+  "Operating System :: MacOS",
+  "Operating System :: POSIX :: Linux",
+]
 
 [project.optional-dependencies]
 test = ["pytest>=8", "ruff>=0.9", "mypy>=1.14", "build>=1"]
